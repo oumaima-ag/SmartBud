@@ -20,28 +20,27 @@ SmartBud is a powerful tool that allows you to extract, summarize, and analyze o
 ## Installation
 
 1. Clone the repository:
-
+   
    ```bash
    git clone https://github.com/your-username/SmartBud.git
+
+
    
-2.Install the required dependencies:
+2. Install the required dependencies:
+    ```bash
+    pip install -r requirements.txt
+    
+3. Usage
+    
+    **Run the following command to start the SmartBud app:**
+      ```bash
+      streamlit run smartbud.py
 
-   pip install -r requirements.txt
-   
-3.Usage
+4. Data Storage
 
-**Run the following command to start the SmartBud app:**
-   streamlit run smartbud.py
+   All data, including article links, summaries, questions, and answers, is saved in a CSV file named smartbud_data.csv. You can download the data from the app's sidebar.
 
 
-4.How to Use
 
-    1.Enter the link to the article or PDF you want to analyze.
-    2.Click the "Extract Text and Generate Summary" button to get the article text and summary.
-    3.Ask questions about the article in the "Ask a Question" section and click "Obtain Answer."
-    4.Rate the quality of the extracted summary or answer in the "User Feedback" section.
-    5.Use the "Clear Session" button to start fresh.
 
-5.Data Storage
 
-All data, including article links, summaries, questions, and answers, is saved in a CSV file named smartbud_data.csv. You can download the data from the app's sidebar.
