@@ -10,10 +10,10 @@ import fitz
 from summarizer import Summarizer
 import base64
 
-# Télécharger les ressources nécessaires pour NLTK and BERT
+
 nltk.download('punkt')
 
-# Fonction pour extraire la réponse à partir du modèle "question_answering"
+
 def get_answer(question, context):
     tokenizer = BertTokenizer.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
     model = BertForQuestionAnswering.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
@@ -28,7 +28,7 @@ def get_answer(question, context):
         tokenizer.convert_ids_to_tokens(inputs["input_ids"][0][answer_start:answer_end]))
     return answer
 
-# Function to create a download link for a file
+
 def get_binary_file_downloader_html(file_path):
     with open(file_path, 'rb') as file:
         data = file.read()
@@ -42,10 +42,10 @@ def main():
     if 'search_history' not in st.session_state:
         st.session_state.search_history = []
 
-    # Create a CSV file for storing the data
+   
     csv_filename = "smartbud_data.csv"
 
-    # Add a "Clear Session" button
+    
     clear_session = st.button("Clear Session")
     if clear_session:
         st.session_state.article_text = None
@@ -101,7 +101,7 @@ def main():
     if extract_button and link:
         st.session_state.search_history.append(link)
 
-    # Display search history
+    
     st.sidebar.title("Search History")
     if st.session_state.search_history:
         st.sidebar.write("Recent Searches:")
@@ -109,11 +109,11 @@ def main():
             st.sidebar.write(f"{i + 1}. {search}")
 
     if "article_text" in st.session_state and st.session_state.article_text is not None:
-        # Affichage du texte extrait et du résumé
+       
         st.header("Texte extrait de l'article :")
         st.text_area("", value=st.session_state.article_text, height=300)
 
-        # Générer le résumé
+       
         summarizer = Summarizer()
         summary = summarizer(st.session_state.article_text)
         st.subheader("Résumé généré :")
@@ -128,19 +128,18 @@ def main():
             st.subheader("Réponse:")
             st.write(answer)
 
-            # Save data to CSV
+            
             with open(csv_filename, mode="a", newline="", encoding="utf-8") as file:
                 writer = csv.writer(file, delimiter=";")
                 writer.writerow([link, summary, user_input, answer])
 
-    # User Feedback Section
+  
     st.sidebar.title("User Feedback")
     feedback = st.sidebar.radio("Rate the Quality of the Extracted Summary or Answer:",
                                options=["Excellent", "Good", "Fair", "Poor"])
     if feedback:
         st.sidebar.write(f"Thank you for your feedback! You rated the quality as: {feedback}")
 
-    # User Guide Section
     st.sidebar.title("User Guide")
     st.sidebar.markdown("Welcome to SmartBud! Here's how to use it:")
     st.sidebar.markdown("- Enter the link to the article you want to extract.")
@@ -151,7 +150,6 @@ def main():
 
 
 
-    # Download Data Section
     st.sidebar.title("Download Data")
     if st.button("Download Data"):
         st.sidebar.write(f"Downloading data as {csv_filename}...")
